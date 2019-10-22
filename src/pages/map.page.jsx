@@ -3,6 +3,8 @@ import React, { Fragment } from "react";
 import ReactMapGL, { Marker } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
+import UserInput from "../components/UserInput/user-input.component";
+
 class MapPage extends React.Component {
   state = {
     viewport: {
@@ -11,7 +13,8 @@ class MapPage extends React.Component {
       latitude: -23.5489,
       longitude: -46.6388,
       zoom: 14
-    }
+    },
+    shouldDisplayInput: false
   };
 
   componentDidMount() {
@@ -30,7 +33,8 @@ class MapPage extends React.Component {
         ...this.state.viewport,
         latitude,
         longitude
-      }
+      },
+      shouldDisplayInput: true
     });
   };
 
@@ -47,6 +51,7 @@ class MapPage extends React.Component {
   render() {
     return (
       <Fragment>
+        <UserInput shouldDisplay={this.state.shouldDisplayInput} />
         <ReactMapGL
           {...this.state.viewport}
           onClick={this.handleMapClick}

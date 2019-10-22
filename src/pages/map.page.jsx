@@ -1,5 +1,9 @@
 import React, { Fragment } from "react";
 
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { Creators as UsersActions } from "../store/ducks/users.ducks";
+
 import ReactMapGL, { Marker } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
@@ -13,8 +17,7 @@ class MapPage extends React.Component {
       latitude: -23.5489,
       longitude: -46.6388,
       zoom: 14
-    },
-    shouldDisplayInput: false
+    }
   };
 
   componentDidMount() {
@@ -27,14 +30,13 @@ class MapPage extends React.Component {
 
   handleMapClick = e => {
     const [longitude, latitude] = e.lngLat;
-
+    this.props.showInput();
     this.setState({
       viewport: {
         ...this.state.viewport,
         latitude,
         longitude
-      },
-      shouldDisplayInput: true
+      }
     });
   };
 
@@ -49,9 +51,10 @@ class MapPage extends React.Component {
   };
 
   render() {
+    const { displayInput } = this.props.users;
     return (
       <Fragment>
-        <UserInput shouldDisplay={this.state.shouldDisplayInput} />
+        <UserInput />
         <ReactMapGL
           {...this.state.viewport}
           onClick={this.handleMapClick}
@@ -65,4 +68,14 @@ class MapPage extends React.Component {
   }
 }
 
-export default MapPage;
+const mapStateToProps = state => ({
+  users: state.users
+});
+
+const mapDispacthTopProps = dispatch =>
+  bindActionCreators(UsersActions, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispacthTopProps
+)(MapPage);

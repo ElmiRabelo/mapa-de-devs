@@ -1,18 +1,49 @@
-import React from "react";
+import React, { Component } from "react";
+
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { Creators as UsersActions } from "../../store/ducks/users.ducks";
 
 import { Container, Card, Button } from "./user-input.styles";
 
-const UserInput = ({ shouldDisplay }) => (
-  <Container displayInput={shouldDisplay}>
-    <Card>
-      <p>Adicionar novo usuário</p>
-      <input type="text" placeholder="Usuário no Github" />
-      <div>
-        <Button>Cancelar</Button>
-        <Button primary>Adicionar</Button>
-      </div>
-    </Card>
-  </Container>
-);
+class UserInput extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: ""
+    };
+  }
 
-export default UserInput;
+  render() {
+    const { users, hideInput } = this.props;
+    return (
+      <Container displayInput={users.displayInput}>
+        <Card>
+          <p>Adicionar novo usuário</p>
+          <input
+            type="text"
+            value={this.state.username}
+            placeholder="Usuário no Github"
+            onChange={e => this.setState({ username: e.target.value })}
+          />
+          <div>
+            <Button onClick={() => hideInput()}>Cancelar</Button>
+            <Button primary>Adicionar</Button>
+          </div>
+        </Card>
+      </Container>
+    );
+  }
+}
+
+const mapStateToProps = state => ({
+  users: state.users
+});
+
+const mapDispacthTopProps = dispatch =>
+  bindActionCreators(UsersActions, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispacthTopProps
+)(UserInput);

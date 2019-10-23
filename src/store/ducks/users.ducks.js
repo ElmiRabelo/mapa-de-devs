@@ -25,7 +25,7 @@ export default function users(state = INITIAL_STATE, action) {
         ...state,
         data: [...state.data, action.payload],
         loading: false,
-        DisplayInput: false
+        displayInput: false
       };
     case Types.SHOW_INPUT:
       return { ...state, displayInput: true };

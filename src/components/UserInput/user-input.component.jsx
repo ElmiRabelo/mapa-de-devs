@@ -14,6 +14,12 @@ class UserInput extends Component {
     };
   }
 
+  handleGetRequest = () => {
+    this.props.getUserRequest(this.state.username);
+    this.setState({ username: "" });
+    this.props.hideInput();
+  };
+
   render() {
     const { users, hideInput } = this.props;
     return (
@@ -28,7 +34,9 @@ class UserInput extends Component {
           />
           <div>
             <Button onClick={() => hideInput()}>Cancelar</Button>
-            <Button primary>Adicionar</Button>
+            <Button primary onClick={this.handleGetRequest}>
+              Adicionar
+            </Button>
           </div>
         </Card>
       </Container>

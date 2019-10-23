@@ -51,7 +51,6 @@ class MapPage extends React.Component {
   };
 
   render() {
-    const { displayInput } = this.props.users;
     return (
       <Fragment>
         <UserInput />

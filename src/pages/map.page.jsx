@@ -8,6 +8,7 @@ import ReactMapGL, { Marker } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
 import UserInput from "../components/UserInput/user-input.component";
+import UsersList from "../components/UsersList/users-list.component";
 
 class MapPage extends React.Component {
   state = {
@@ -54,6 +55,7 @@ class MapPage extends React.Component {
     return (
       <Fragment>
         <UserInput />
+        <UsersList />
         <ReactMapGL
           {...this.state.viewport}
           onClick={this.handleMapClick}

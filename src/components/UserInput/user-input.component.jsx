@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 
+//React e Redux
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Creators as UsersActions } from "../../store/ducks/users.ducks";
-
+//styles
 import { Container, Card, Button } from "./user-input.styles";
 
+//Component responsavel por mostar o input e os botões para adicionar um novo user
 class UserInput extends Component {
   constructor(props) {
     super(props);
@@ -16,8 +18,8 @@ class UserInput extends Component {
 
   handleGetRequest = () => {
     this.props.getUserRequest(this.state.username);
+    setTimeout(() => console.log("ola"), 3000);
     this.setState({ username: "" });
-    this.props.hideInput();
   };
 
   render() {
@@ -35,7 +37,7 @@ class UserInput extends Component {
           <div>
             <Button onClick={() => hideInput()}>Cancelar</Button>
             <Button primary onClick={this.handleGetRequest}>
-              Adicionar
+              {users.loading ? "Carregando..." : "Adicionar"}
             </Button>
           </div>
         </Card>

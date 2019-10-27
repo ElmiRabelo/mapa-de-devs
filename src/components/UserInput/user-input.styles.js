@@ -50,6 +50,10 @@ export const Card = styled.div`
 `;
 
 export const Button = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 41px;
   padding: 10px 15px;
   font-size: 18px;
   background-color: ${props => (props.primary ? "#00AC25" : "#ABABAB")};

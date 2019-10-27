@@ -1,13 +1,14 @@
 import React from "react";
 
+//react e redux
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { Creators as UsersActions } from "../../store/ducks/users.ducks";
 
+//custom components
 import UserCard from "../UserCard/user-card.component";
-
+//styles
 import { Container } from "./users-list.styles";
 
+//Component resposavel por fazer a listagem de users
 const UserList = ({ users }) => {
   return (
     <Container>
@@ -28,10 +29,4 @@ const mapStateToProps = state => ({
   users: state.users
 });
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(UsersActions, dispatch);
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(UserList);
+export default connect(mapStateToProps)(UserList);

@@ -3,6 +3,7 @@ import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Creators as UsersActions } from "../store/ducks/users.ducks";
+import { Creators as MapActions } from "../store/ducks/map.ducks";
 
 import ReactMapGL, { Marker } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
@@ -11,16 +12,6 @@ import UserInput from "../components/UserInput/user-input.component";
 import UsersList from "../components/UsersList/users-list.component";
 
 class MapPage extends React.Component {
-  state = {
-    viewport: {
-      width: window.innerWidth,
-      height: window.innerHeight,
-      latitude: -23.5489,
-      longitude: -46.6388,
-      zoom: 14
-    }
-  };
-
   componentDidMount() {
     window.addEventListener("resize", this._resize);
     this._resize();
@@ -32,37 +23,26 @@ class MapPage extends React.Component {
   handleMapClick = e => {
     const [longitude, latitude] = e.lngLat;
     this.props.showInput();
-    this.setState({
-      viewport: {
-        ...this.state.viewport,
-        latitude,
-        longitude
-      }
-    });
+    this.props.mapClick({ latitude, longitude });
   };
 
   _resize = () => {
-    this.setState({
-      viewport: {
-        ...this.state.viewport,
-        height: window.innerHeight,
-        width: window.innerWidth
-      }
-    });
+    this.props.resizeRequest();
   };
 
   render() {
+    const { map } = this.props;
     return (
       <Fragment>
         <UserInput />
         <UsersList />
         <ReactMapGL
-          {...this.state.viewport}
+          {...map.viewport}
           onClick={this.handleMapClick}
           mapboxApiAccessToken={
             "pk.eyJ1IjoiZ29sZGVubWsiLCJhIjoiY2sxZ3dybml2MDF3aDNvb2hodnZyMXpuNCJ9.qVHNOUg7tzAZhdH8yZdHOg"
           }
-          onViewportChange={viewport => this.setState({ viewport })}
+          onViewportChange={viewport => this.props.onViewportChange(viewport)}
         ></ReactMapGL>
       </Fragment>
     );
@@ -70,11 +50,12 @@ class MapPage extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  users: state.users
+  users: state.users,
+  map: state.map
 });
 
 const mapDispacthTopProps = dispatch =>
-  bindActionCreators(UsersActions, dispatch);
+  bindActionCreators({ ...UsersActions, ...MapActions }, dispatch);
 
 export default connect(
   mapStateToProps,

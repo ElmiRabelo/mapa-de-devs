@@ -19,6 +19,8 @@ const UserList = ({ users }) => {
           name={user.name}
           blog={user.blog}
           avatar={user.avatar_url}
+          latitude={user.latitude}
+          longitude={user.longitude}
         />
       ))}
     </Container>

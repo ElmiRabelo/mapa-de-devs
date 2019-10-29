@@ -19,6 +19,7 @@ class UserInput extends Component {
   handleGetRequest = () => {
     const { username } = this.state;
     const { latitude, longitude } = this.props.map.viewport;
+    //Requisição envia nome do user no github e localização capturada do click no mapa
     this.props.getUserRequest({ username, latitude, longitude });
     this.setState({ username: "" });
   };
@@ -33,7 +34,7 @@ class UserInput extends Component {
           <input
             type="text"
             value={this.state.username}
-            placeholder="Usuário no Github"
+            placeholder="Usuário no Github. Ex: wesbos, bradtraversy"
             onChange={e => this.setState({ username: e.target.value })}
           />
           <div>

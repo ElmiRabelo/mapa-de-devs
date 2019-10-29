@@ -3,10 +3,20 @@ import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Creators as UsersActions } from "../../store/ducks/users.ducks";
+import { Creators as MapActions } from "../../store/ducks/map.ducks";
 
 import { Container, Card } from "./user-card.styles";
 
-const UserCard = ({ id, name, blog, avatar, removeUser }) => {
+const UserCard = ({
+  id,
+  name,
+  blog,
+  avatar,
+  removeUser,
+  latitude,
+  longitude,
+  showOnMap
+}) => {
   return (
     <Container key={id}>
       <Card>
@@ -15,7 +25,14 @@ const UserCard = ({ id, name, blog, avatar, removeUser }) => {
           <p>
             <strong>{name}</strong>
           </p>
-          <a href={blog}>Github</a>
+          <button>
+            <a href={blog} target="_blank">
+              Ver no Github
+            </a>
+          </button>
+          <button onClick={() => showOnMap({ latitude, longitude })}>
+            Ver no mapa
+          </button>
         </div>
       </Card>
       <button onClick={() => removeUser(id)}>X</button>
@@ -24,7 +41,7 @@ const UserCard = ({ id, name, blog, avatar, removeUser }) => {
 };
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators(UsersActions, dispatch);
+  bindActionCreators({ ...UsersActions, ...MapActions }, dispatch);
 
 export default connect(
   null,

@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
-  height: 60px;
-  background: #f4f4f4;
+  height: 75px;
+  background: #f5f5fa;
   position: relative;
   & > button {
     position: absolute;
@@ -36,8 +36,23 @@ export const Card = styled.div`
     margin-right: 15px;
   }
 
+  button,
   a {
     text-decoration: none;
-    color: #114afa;
+    color: #fff;
+
+    &:hover {
+      background: #666;
+    }
+  }
+
+  button {
+    background-color: #333;
+    width: 100%;
+    padding: 2px 0;
+    margin: 2px 0;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
   }
 `;

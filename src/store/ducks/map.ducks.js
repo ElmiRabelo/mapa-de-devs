@@ -3,6 +3,7 @@
 export const Types = {
   RESIZE_REQUEST: "map/RESIZE_REQUEST",
   MAP_CLICK: "map/MAP_CLICK",
+  SHOW_ON_MAP: "map/SHOW_ON_MAP",
   ON_VIEWPORT_CHANGE: "map/ON_VIEWPORT_CHANGE"
 };
 
@@ -34,6 +35,11 @@ export default function map(state = INITIAL_STATE, action) {
         ...state,
         viewport: { ...state.viewport, ...action.payload }
       };
+    case Types.SHOW_ON_MAP:
+      return {
+        ...state,
+        viewport: { ...state.viewport, ...action.payload }
+      };
     case Types.ON_VIEWPORT_CHANGE:
       return { ...state, viewport: action.payload };
     default:
@@ -47,6 +53,10 @@ export const Creators = {
   resizeRequest: () => ({ type: Types.RESIZE_REQUEST }),
   mapClick: ({ latitude, longitude }) => ({
     type: Types.MAP_CLICK,
+    payload: { latitude, longitude }
+  }),
+  showOnMap: ({ latitude, longitude }) => ({
+    type: Types.SHOW_ON_MAP,
     payload: { latitude, longitude }
   }),
   onViewportChange: payload => ({ type: Types.ON_VIEWPORT_CHANGE, payload })

@@ -17,8 +17,9 @@ class UserInput extends Component {
   }
 
   handleGetRequest = () => {
-    this.props.getUserRequest(this.state.username);
-    setTimeout(() => console.log("ola"), 3000);
+    const { username } = this.state;
+    const { latitude, longitude } = this.props.map.viewport;
+    this.props.getUserRequest({ username, latitude, longitude });
     this.setState({ username: "" });
   };
 
@@ -28,6 +29,7 @@ class UserInput extends Component {
       <Container displayInput={users.displayInput}>
         <Card>
           <p>Adicionar novo usuário</p>
+          {users.error && <small>{users.errorMessage}</small>}
           <input
             type="text"
             value={this.state.username}
@@ -47,7 +49,8 @@ class UserInput extends Component {
 }
 
 const mapStateToProps = state => ({
-  users: state.users
+  users: state.users,
+  map: state.map
 });
 
 const mapDispacthTopProps = dispatch =>

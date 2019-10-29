@@ -5,10 +5,11 @@ import { Creators as UsersActions } from "../ducks/users.ducks";
 
 export default function* getUser(action) {
   try {
-    const response = yield call(api.get, `/users/${action.payload}`);
-
-    yield put(UsersActions.getUserSuccess(response.data));
+    const response = yield call(api.get, `/users/${action.payload.username}`);
+    const { latitude, longitude } = action.payload;
+    const newUser = { ...response.data, latitude, longitude };
+    yield put(UsersActions.getUserSuccess(newUser));
   } catch (err) {
-    console.tron.log("Usuário não encontrado");
+    yield put(UsersActions.error("Usuário não existe, tente outro."));
   }
 }

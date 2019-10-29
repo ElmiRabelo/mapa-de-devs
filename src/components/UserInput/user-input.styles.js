@@ -26,8 +26,13 @@ export const Card = styled.div`
   border-radius: 10px;
 
   p {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
+  }
+  small {
+    font-size: 16px;
+    color: #c01d1d;
+    margin-top: 15px;
   }
 
   input {

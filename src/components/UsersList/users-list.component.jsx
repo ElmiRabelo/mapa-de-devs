@@ -17,7 +17,7 @@ const UserList = ({ users }) => {
           key={user.id}
           id={user.id}
           name={user.name}
-          blog={user.blog}
+          htmlUrl={user.html_url}
           avatar={user.avatar_url}
           latitude={user.latitude}
           longitude={user.longitude}

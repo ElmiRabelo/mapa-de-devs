@@ -10,7 +10,7 @@ import { Container, Card } from "./user-card.styles";
 const UserCard = ({
   id,
   name,
-  blog,
+  htmlUrl,
   avatar,
   removeUser,
   latitude,
@@ -26,7 +26,9 @@ const UserCard = ({
             <strong>{name}</strong>
           </p>
           <button>
-            <a href={blog}>Ver no Github</a>
+            <a href={htmlUrl} target="_blank">
+              Ver no Github
+            </a>
           </button>
           <button onClick={() => showOnMap({ latitude, longitude })}>
             Ver no mapa

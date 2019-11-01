@@ -53,6 +53,7 @@ class MapPage extends React.Component {
               latitude={user.latitude}
               longitude={user.longitude}
               captureClick={true}
+              key={user.id}
             >
               <img
                 style={{

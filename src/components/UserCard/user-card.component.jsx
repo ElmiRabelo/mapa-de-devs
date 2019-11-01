@@ -26,7 +26,7 @@ const UserCard = ({
             <strong>{name}</strong>
           </p>
           <button>
-            <a href={blog} target="_blank">
+            <a href={blog} target="_blank" rel="noopener noreferrer">
               Ver no Github
             </a>
           </button>

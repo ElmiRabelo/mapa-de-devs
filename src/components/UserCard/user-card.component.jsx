@@ -26,9 +26,7 @@ const UserCard = ({
             <strong>{name}</strong>
           </p>
           <button>
-            <a href={blog} target="_blank" rel="noopener noreferrer">
-              Ver no Github
-            </a>
+            <a href={blog}>Ver no Github</a>
           </button>
           <button onClick={() => showOnMap({ latitude, longitude })}>
             Ver no mapa
